@@ -1,6 +1,7 @@
 #based on spzZapHistory and ZapHistoryBrowser mod aka Uchkun
 #created by Vasiliks 11.2015
-#r0.1_r5  PLI version
+#added picon providers 05.01.2018
+#r0.1_r6  PLI version
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
@@ -8,7 +9,6 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryProgress, MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
-from Components.Sources.StaticText import StaticText
 from enigma import BT_SCALE, getDesktop, eListboxPythonMultiContent, eServiceCenter, eServiceReference, eTimer, gFont, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_WRAP, RT_VALIGN_CENTER
 from Components.ParentalControl import parentalControl
 from Plugins.Plugin import PluginDescriptor
@@ -22,30 +22,30 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCO
 screenWidth = getDesktop(0).size().width()
 
 color = [("0xffffff", _("white")),
-	    ("0xc0c0c0", _("lightgrey")),
-	    ("0x8f8f8f", _("grey")),
-	    ("0x555555", _("darkgrey")),
-	    ("0xffff55", _("yellow")),
-	    ("0xffcc33", _("gold")),
-	    ("0xff80ff", _("pink")),
-	    ("0xff8000", _("orange")),
-	    ("0xff0000", _("red")),
-	    ("0x800000", _("crimson")),
-	    ("0x804000", _("brown")),
-	    ("0x80ff00", _("lime")),
-	    ("0x00ff00", _("green")),
-	    ("0x008000", _("darkgreen")),
-	    ("0x00ffff", _("aqua")),
-	    ("0x0099ff", _("skyblue")),
-	    ("0x0000ff", _("blue")),
-	    ("0x000080", _("darkblue")),
-	    ("0x8080ff", _("lilac")),
-	    ("0x400080", _("purple"))]
+        ("0xc0c0c0", _("lightgrey")),
+        ("0x8f8f8f", _("grey")),
+        ("0x555555", _("darkgrey")),
+        ("0xffff55", _("yellow")),
+        ("0xffcc33", _("gold")),
+        ("0xff80ff", _("pink")),
+        ("0xff8000", _("orange")),
+        ("0xff0000", _("red")),
+        ("0x800000", _("crimson")),
+        ("0x804000", _("brown")),
+        ("0x80ff00", _("lime")),
+        ("0x00ff00", _("green")),
+        ("0x008000", _("darkgreen")),
+        ("0x00ffff", _("aqua")),
+        ("0x0099ff", _("skyblue")),
+        ("0x0000ff", _("blue")),
+        ("0x000080", _("darkblue")),
+        ("0x8080ff", _("lilac")),
+        ("0x400080", _("purple"))]
 
 config.plugins.vZapHistory = ConfigSubsection()
 config.plugins.vZapHistory.enable = ConfigSelection(default='on', choices=[('off', _('disabled')), ('on', _('enabled')), ('parental_lock', _('disabled at parental lock'))])
 config.plugins.vZapHistory.maxEntries = ConfigInteger(default=20, limits=(2, 60))
-config.plugins.vZapHistory.viewMode = ConfigSelection(default='picons', choices=[('menu', _('standard')), ('picons', _('with picons'))])
+config.plugins.vZapHistory.viewMode = ConfigSelection(default='picons', choices=[('menu', _('standard')), ('picons', _('with picons')), ('picons_prov', _('with picons providers'))])
 config.plugins.vZapHistory.alignment = ConfigSelection(default='left', choices=[('left', _('left')), ('center', _('center')), ('right', _('right'))])
 config.plugins.vZapHistory.autoZap = ConfigEnableDisable(default=False)
 config.plugins.vZapHistory.namecolor = ConfigSelection(default="0xffffff", choices = color)
@@ -159,7 +159,7 @@ class vZapHistoryBrowserList(MenuList):
         self.l.setFont(2, gFont('Regular', 15))
         self.l.setFont(3, gFont('Regular', 12))
 
-def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar, png):       #
+def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar, png, png_prov):       #
     res = [serviceName]
     lasflags = RT_HALIGN_LEFT
     if config.plugins.vZapHistory.alignment.value == 'center':
@@ -191,6 +191,23 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             durationTime_font=2
             bar_pos=(795, 45)
             bar_size=(180, 10)
+        if config.plugins.vZapHistory.viewMode.value == 'picons_prov':
+            self['list'].l.setItemHeight(70)
+            png_pos=(5, 5)
+            png_size=(100, 60)
+            png_prov_pos=(110, 5)
+            png_prov_size=(100, 60)
+            serviceName_pos=(215, 3)
+            serviceName_size=(570, 25)
+            serviceName_font=0
+            eventName_pos=(215, 28)
+            eventName_size=(570, 40)
+            eventName_font=1
+            durationTime_pos=(795, 16)
+            durationTime_size=(180, 25)
+            durationTime_font=2
+            bar_pos=(795, 45)
+            bar_size=(180, 10)
         elif config.plugins.vZapHistory.viewMode.value == 'menu':
             self['list'].l.setItemHeight(50)
             serviceName_pos=(5, 1)
@@ -211,16 +228,33 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             png_pos=(3, 3)
             png_size=(90, 54)
             serviceName_pos=(100, 2)
-            serviceName_size=(420, 18)
+            serviceName_size=(440, 18)
             serviceName_font=1
             eventName_pos=(100, 24)
-            eventName_size=(420, 40)
+            eventName_size=(440, 40)
             eventName_font=2
-            durationTime_pos=(525, 16)
-            durationTime_size=(140, 25)
+            durationTime_pos=(545, 16)
+            durationTime_size=(120, 25)
             durationTime_font=3
-            bar_pos=(525, 40)
-            bar_size=(140, 6)
+            bar_pos=(545, 40)
+            bar_size=(120, 6)
+        elif config.plugins.vZapHistory.viewMode.value == 'picons_prov':
+            self['list'].l.setItemHeight(60)
+            png_pos=(3, 3)
+            png_size=(90, 54)
+            png_prov_pos=(99, 3)
+            png_prov_size=(90, 54)
+            serviceName_pos=(192, 2)
+            serviceName_size=(348, 18)
+            serviceName_font=1
+            eventName_pos=(192, 24)
+            eventName_size=(348, 40)
+            eventName_font=2
+            durationTime_pos=(545, 16)
+            durationTime_size=(120, 25)
+            durationTime_font=3
+            bar_pos=(545, 40)
+            bar_size=(120, 6)
         elif config.plugins.vZapHistory.viewMode.value == 'menu':
             self['list'].l.setItemHeight(50)
             serviceName_pos=(5, 2)
@@ -251,8 +285,10 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
         bar_pos=(380, 32)
         bar_size=(140, 8)
 
-    if config.plugins.vZapHistory.viewMode.value == 'picons':
+    if 'picons' in config.plugins.vZapHistory.viewMode.value:                                                
         res.append(MultiContentEntryPixmapAlphaBlend(pos=png_pos, size=png_size, flags = BT_SCALE, png=png))
+    if 'picons_prov' in config.plugins.vZapHistory.viewMode.value:                                          
+        res.append(MultiContentEntryPixmapAlphaBlend(pos=png_prov_pos, size=png_prov_size, flags = BT_SCALE, png=png_prov))
     res.append(MultiContentEntryText(pos=serviceName_pos, size=serviceName_size, font=serviceName_font, flags=lasflags, text=serviceName, color=namecolor, color_sel=namecolor_sel))
     res.append(MultiContentEntryText(pos=eventName_pos, size=eventName_size, font=eventName_font, flags=lasflags | RT_VALIGN_CENTER | RT_WRAP, text=eventName, color=eventcolor, color_sel=eventcolor_sel))
     res.append(MultiContentEntryText(pos=durationTime_pos, size=durationTime_size, font=durationTime_font, flags=lasflags, text=durationTime, color=duratcolor, color_sel=duratcolor_sel))
@@ -281,7 +317,7 @@ class vZapHistory(Screen, ProtectedScreen):
         self['key_red'] = Label(_('Clear'))
         self['key_yellow'] = Label(_('Delete'))
         self['key_blue'] = Label(_('Settings'))
-        self["Title"] = StaticText(_("ZapHistory"))
+        self.setTitle(_("ZapHistory"))
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions', 'DirectionActions'],
         {'cancel': self.cancel,
          'left': self.keyLeft,
@@ -309,7 +345,24 @@ class vZapHistory(Screen, ProtectedScreen):
             pass
         serviceName = serviceName.toString()
         serviceName = '_'.join(serviceName.split(':', 10)[:10])
-        searchPaths = ['/usr/share/enigma2/picon/', '/media/hdd/picon/', '/media/usb/picon/', '/media/ba/picon/', '/media/sda1/picon/', '/media/sdb1/picon/', '/media/cf/picon/']
+        searchPaths = ['/media/hdd/picon/', '/media/usb/picon/', '/usr/share/enigma2/picon/', '/media/sda1/picon/', '/media/sdb1/picon/']
+        for path in searchPaths:
+            pngname = path + serviceName + '.png'
+            if fileExists(pngname):
+                return pngname
+            pngname = path + 'picon_default.png'
+            if fileExists(pngname):
+                return pngname
+        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+        if fileExists(pngname):
+            return pngname
+        else:
+            return resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
+            
+    def findPiconprov(self, service):
+        name = self.getProviderName(service)
+        serviceName = name.upper()
+        searchPaths = ['/media/hdd/piconProv/', '/media/usb/piconProv/', '/usr/share/enigma2/piconProv/', '/media/sda1/piconProv/', '/media/sdb1/piconProv/']
         for path in searchPaths:
             pngname = path + serviceName + '.png'
             if fileExists(pngname):
@@ -323,7 +376,32 @@ class vZapHistory(Screen, ProtectedScreen):
         else:
             return resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
 
+    def getProviderName(self, ref):
+        if isinstance(ref, eServiceReference):
+            from Screens.ChannelSelection import service_types_radio, service_types_tv
+            typestr = ref.getData(0) in (2,10) and service_types_radio or service_types_tv
+            pos = typestr.rfind(':')
+            rootstr = '%s (channelID == %08x%04x%04x) && %s FROM PROVIDERS ORDER BY name' %(typestr[:pos+1],ref.getUnsignedData(4),ref.getUnsignedData(2),ref.getUnsignedData(3),typestr[pos+1:])
+            provider_root = eServiceReference(rootstr)
+            serviceHandler = eServiceCenter.getInstance()
+            providerlist = serviceHandler.list(provider_root)
+            if not providerlist is None:
+                while True:
+                    provider = providerlist.getNext()
+                    if not provider.valid(): break
+                    if provider.flags & eServiceReference.isDirectory:
+                        servicelist = serviceHandler.list(provider)
+                        if not servicelist is None:
+                            while True:
+                                service = servicelist.getNext()
+                                if not service.valid(): break
+                                if service == ref:
+                                    info = serviceHandler.info(provider)
+                                    return info and info.getName(provider) or "Unknown"
+        return ""
+
     def buildList(self):
+        prov = ""
         list = []
         for x in self.servicelist.history:
             if len(x) == 2:
@@ -331,6 +409,7 @@ class vZapHistory(Screen, ProtectedScreen):
             else:
                 ref = x[2]
             png = loadPNG(self.findPicon(ref))
+            png_prov = loadPNG(self.findPiconprov(ref))
             info = self.serviceHandler.info(ref)
             if info:
                 name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
@@ -356,7 +435,7 @@ class vZapHistory(Screen, ProtectedScreen):
                             i = (100 * (int(time()) - begin)) / event.getDuration()
                             if i < 101:
                                 bar = i
-                            durationTime = _("%02d.%02d - %02d.%02d (%s%d min)") % (local_begin[3],local_begin[4],local_end[3],local_end[4],prefix, remaining)
+                            durationTime = _("%02d.%02d - %02d.%02d (%s%d m)") % (local_begin[3],local_begin[4],local_end[3],local_end[4],prefix, remaining)
                     except:
                         durationTime = ''
                 else:
@@ -370,7 +449,7 @@ class vZapHistory(Screen, ProtectedScreen):
                 durationTime = ''
                 descriptionName = ''
                 bar = 0
-            list.append(vZapHistoryBrowserListEntry(self, name, eventName, durationTime, bar, png))
+            list.append(vZapHistoryBrowserListEntry(self, name, eventName, durationTime, bar, png, png_prov))
         list.reverse()
         self['list'].setList(list)
 
@@ -493,7 +572,7 @@ class vZapHistoryConf(ConfigListScreen, Screen):
             self.skin = skinConf_sd
         self['key_red'] = Label(_('Cancel'))
         self['key_green'] = Label( _('Save'))
-        self["Title"] = StaticText(_('Settings'))
+        self.setTitle(_('Settings'))
         ConfigListScreen.__init__(self, [getConfigListEntry(_('Enable zap history:'), config.plugins.vZapHistory.enable),
          getConfigListEntry(_('View mode:'), config.plugins.vZapHistory.viewMode),
          getConfigListEntry(_('Alignment list:'), config.plugins.vZapHistory.alignment),
