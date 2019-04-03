@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: vZapHistory\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-17 01:13+0100\n"
+"PO-Revision-Date: 2015-09-26 10:02+0100\n"
+"Last-Translator: Vasiliks <vasiliks@narod.ru>\n"
+"Language-Team: Vasiliks\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Language: de_DE\n"
+"X-Generator: Poedit 1.7.4\n"
+
+msgid "%02d.%02d - %02d.%02d (%s%d min)"
+msgstr "%02d.%02d - %02d.%02d (%s%d min)"
+
+msgid "Alignment list:"
+msgstr "Listenansicht:"
+
+msgid "Autozap when move in list:"
+msgstr "Automatisches Umschalten beim Scrollen:"
+
+msgid "Clear"
+msgstr "Entleeren"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Duration time color:"
+msgstr "Dauer Zeit Farbe (wenn nicht ausgewählt):"
+
+msgid "Enable zap history:"
+msgstr "ZapHistory Aktivieren:"
+
+msgid "Event color:"
+msgstr "Farbe der Sendung (wenn nicht ausgewählt):"
+
+msgid "Maximum zap history entries:"
+msgstr "Maximale ZapHistory Einträgen:"
+
+msgid "Progress bar color:"
+msgstr "Farbe der Progressbar (wenn nicht ausgewählt):"
+
+msgid "Selected duration time color:"
+msgstr "Dauer Zeit Farbe (wenn ausgewählt):"
+
+msgid "Selected event color:"
+msgstr "Farbe der Sendung (wenn ausgewählt):"
+
+msgid "Selected progress bar color:"
+msgstr "Farbe der Progressbar (wenn ausgewählt):"
+
+msgid "Selected service name color:"
+msgstr "Farbe des Senders (wenn ausgewählt):"
+
+msgid "Service name color:"
+msgstr "Farbe des Senders (wenn nicht ausgewählt):"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "View mode:"
+msgstr "Ansichtsmodus:"
+
+msgid "Zap"
+msgstr "Umschalten"
+
+msgid "ZapHistory"
+msgstr "ZapHistory"
+
+msgid "aqua"
+msgstr "aqua"
+
+msgid "blue"
+msgstr "blau"
+
+msgid "brown"
+msgstr "braun"
+
+msgid "center"
+msgstr "center"
+
+msgid "crimson"
+msgstr "himbeere"
+
+msgid "darkblue"
+msgstr "dunkelblau"
+
+msgid "darkgreen"
+msgstr "dunkelgrün"
+
+msgid "darkgrey"
+msgstr "dunkelgrau"
+
+msgid "disabled at parental lock"
+msgstr "Kindersicherung deaktiviert"
+
+msgid "gold"
+msgstr "gold"
+
+msgid "green"
+msgstr "grün"
+
+msgid "grey"
+msgstr "grau"
+
+msgid "left"
+msgstr "links"
+
+msgid "lightgrey"
+msgstr "hellgrau"
+
+msgid "lilac"
+msgstr "lila"
+
+msgid "lime"
+msgstr "lime"
+
+msgid "orange"
+msgstr "orange"
+
+msgid "pink"
+msgstr "pink"
+
+msgid "purple"
+msgstr "violet"
+
+msgid "red"
+msgstr "rot"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "skyblue"
+msgstr "skyblue"
+
+msgid "standard"
+msgstr "standard"
+
+msgid "white"
+msgstr "weiß"
+
+msgid "with picons"
+msgstr "mit picons"
+
+msgid "yellow"
+msgstr "gelb"

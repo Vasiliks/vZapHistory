@@ -1,6 +1,6 @@
 #based on spzZapHistory and ZapHistoryBrowser mod aka Uchkun
-#created by Vasiliks 09.2015
-#r0.1_r3  PLI version
+#created by Vasiliks 10.2015
+#r0.1_r4  PLI version
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
@@ -14,6 +14,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import ChannelSelection
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
+import Screens.InfoBar
 from time import localtime, time
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN
 
@@ -123,11 +124,24 @@ def vZapHistoryBrowserListEntry(serviceName, eventName, durationTime, bar, png):
     return res
 
 class vZapHistory(Screen, ProtectedScreen):
+    skin = """
+    <screen name="vZapHistoryMenu" position="center,center" size="860,540" title="%s">
+      <widget name="list" position="5,45" size="850,490" scrollbarMode="showOnDemand" transparent="1"/>
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="20,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="240,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="460,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="680,7" size="160,30" transparent="1" alphatest="blend" />
+      <widget name="key_red" position="20,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
+      <widget name="key_green" position="240,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
+      <widget name="key_yellow" position="460,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
+      <widget name="key_menu" position="680,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
+    </screen>""" % _('ZapHistory')
+
     def __init__(self, session, servicelist):
         Screen.__init__(self, session)
         ProtectedScreen.__init__(self)
         self.session = session
-        self.servicelist = servicelist
+        self.servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
         self.serviceHandler = eServiceCenter.getInstance()
         self.allowChanges = True
         self.zapDown = False
@@ -367,10 +381,8 @@ class vZapHistoryConf(ConfigListScreen, Screen):
          getConfigListEntry(_('Selected duration time color:'), config.plugins.vZapHistory.duratcolor_sel),
          getConfigListEntry(_('Selected progress bar color:'), config.plugins.vZapHistory.barcolor_sel)])
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
-        {'ok': self.save,
-         'green': self.save,
-         'cancel': self.exit,
-         'red': self.exit}, -2)
+        {'ok': self.save, 'green': self.save,
+         'cancel': self.exit, 'red': self.exit}, -2)
 
     def save(self):
         for x in self['config'].list:
@@ -382,25 +394,8 @@ class vZapHistoryConf(ConfigListScreen, Screen):
             x[1].cancel()
         self.close()
 
-class vZapHistoryMenu(vZapHistory):
-    skin = """
-    <screen name="vZapHistoryMenu" position="center,center" size="860,540" title="%s">
-      <widget name="list" position="5,45" size="850,490" scrollbarMode="showOnDemand" transparent="1"/>
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="20,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="240,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="460,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="680,7" size="160,30" transparent="1" alphatest="blend" />
-      <widget name="key_red" position="20,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
-      <widget name="key_green" position="240,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
-      <widget name="key_yellow" position="460,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
-      <widget name="key_menu" position="680,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
-    </screen>""" % _('ZapHistory')
-
-    def __init__(self, session, servicelist):
-        vZapHistory.__init__(self, session, servicelist)
-
-def main(session, servicelist, **kwargs):
-    session.open(vZapHistoryMenu, servicelist)
+def main(session, servicelist = None, **kwargs):
+    session.open(vZapHistory, servicelist)
 
 def Plugins(**kwargs):
     return PluginDescriptor(name=_('ZapHistory'), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
