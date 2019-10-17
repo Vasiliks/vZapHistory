@@ -1,7 +1,8 @@
 #based on spzZapHistory and ZapHistoryBrowser mod aka Uchkun
 #created by Vasiliks 11.2015
 #added picon providers 05.01.2018
-#r0.1_r6  PLI version
+#added picon IPTVproviders 10.10.2019
+#r0.1_r7  PLI version
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
@@ -17,7 +18,7 @@ from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 import Screens.InfoBar
 from time import localtime, time
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN
+from Tools.Directories import fileExists, resolveFilename, SCOPE_CURRENT_SKIN
 
 screenWidth = getDesktop(0).size().width()
 
@@ -45,7 +46,7 @@ color = [("0xffffff", _("white")),
 config.plugins.vZapHistory = ConfigSubsection()
 config.plugins.vZapHistory.enable = ConfigSelection(default='on', choices=[('off', _('disabled')), ('on', _('enabled')), ('parental_lock', _('disabled at parental lock'))])
 config.plugins.vZapHistory.maxEntries = ConfigInteger(default=20, limits=(2, 60))
-config.plugins.vZapHistory.viewMode = ConfigSelection(default='picons', choices=[('menu', _('standard')), ('picons', _('with picons')), ('picons_prov', _('with picons providers'))])
+config.plugins.vZapHistory.viewMode = ConfigSelection(default='pic_serv', choices=[('name', _('only name service')), ('pic_serv', _('with service picon')), ('pic_serv_prov', _('with service and provider picons'))])
 config.plugins.vZapHistory.alignment = ConfigSelection(default='left', choices=[('left', _('left')), ('center', _('center')), ('right', _('right'))])
 config.plugins.vZapHistory.autoZap = ConfigEnableDisable(default=False)
 config.plugins.vZapHistory.namecolor = ConfigSelection(default="0xffffff", choices = color)
@@ -176,7 +177,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
     barcolor_sel = int(config.plugins.vZapHistory.barcolor_sel.value, 16)
 
     if screenWidth == 1920:
-        if config.plugins.vZapHistory.viewMode.value == 'picons':
+        if config.plugins.vZapHistory.viewMode.value == 'pic_serv':
             self['list'].l.setItemHeight(70)
             png_pos=(5, 5)
             png_size=(100, 60)
@@ -191,7 +192,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             durationTime_font=2
             bar_pos=(795, 45)
             bar_size=(180, 10)
-        if config.plugins.vZapHistory.viewMode.value == 'picons_prov':
+        if config.plugins.vZapHistory.viewMode.value == 'pic_serv_prov':
             self['list'].l.setItemHeight(70)
             png_pos=(5, 5)
             png_size=(100, 60)
@@ -208,7 +209,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             durationTime_font=2
             bar_pos=(795, 45)
             bar_size=(180, 10)
-        elif config.plugins.vZapHistory.viewMode.value == 'menu':
+        elif config.plugins.vZapHistory.viewMode.value == 'name':
             self['list'].l.setItemHeight(50)
             serviceName_pos=(5, 1)
             serviceName_size=(785, 24)
@@ -223,7 +224,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             bar_size=(180, 10)
 
     elif screenWidth == 1280:
-        if config.plugins.vZapHistory.viewMode.value == 'picons':
+        if config.plugins.vZapHistory.viewMode.value == 'pic_serv':
             self['list'].l.setItemHeight(60)
             png_pos=(3, 3)
             png_size=(90, 54)
@@ -238,7 +239,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             durationTime_font=3
             bar_pos=(545, 40)
             bar_size=(120, 6)
-        elif config.plugins.vZapHistory.viewMode.value == 'picons_prov':
+        elif config.plugins.vZapHistory.viewMode.value == 'pic_serv_prov':
             self['list'].l.setItemHeight(60)
             png_pos=(3, 3)
             png_size=(90, 54)
@@ -255,7 +256,7 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
             durationTime_font=3
             bar_pos=(545, 40)
             bar_size=(120, 6)
-        elif config.plugins.vZapHistory.viewMode.value == 'menu':
+        elif config.plugins.vZapHistory.viewMode.value == 'name':
             self['list'].l.setItemHeight(50)
             serviceName_pos=(5, 2)
             serviceName_size=(515, 18)
@@ -285,9 +286,9 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
         bar_pos=(380, 32)
         bar_size=(140, 8)
 
-    if 'picons' in config.plugins.vZapHistory.viewMode.value:                                                
+    if 'pic_serv' in config.plugins.vZapHistory.viewMode.value:                                                
         res.append(MultiContentEntryPixmapAlphaBlend(pos=png_pos, size=png_size, flags = BT_SCALE, png=png))
-    if 'picons_prov' in config.plugins.vZapHistory.viewMode.value:                                          
+    if 'pic_serv_prov' in config.plugins.vZapHistory.viewMode.value:                                          
         res.append(MultiContentEntryPixmapAlphaBlend(pos=png_prov_pos, size=png_prov_size, flags = BT_SCALE, png=png_prov))
     res.append(MultiContentEntryText(pos=serviceName_pos, size=serviceName_size, font=serviceName_font, flags=lasflags, text=serviceName, color=namecolor, color_sel=namecolor_sel))
     res.append(MultiContentEntryText(pos=eventName_pos, size=eventName_size, font=eventName_font, flags=lasflags | RT_VALIGN_CENTER | RT_WRAP, text=eventName, color=eventcolor, color_sel=eventcolor_sel))
@@ -336,8 +337,23 @@ class vZapHistory(Screen, ProtectedScreen):
     def cancel(self):
         self.timerAutoZap.stop()
         self.close()
+        
+    def findPicon(self, folder, serviceName):
+        searchPaths = ['/media/hdd/', '/media/usb/', '/usr/share/enigma2/', '/media/sda1/', '/media/sdb1/']
+        for path in searchPaths:
+            pngname = path + folder + "/" + serviceName + '.png'
+            if fileExists(pngname):
+                return pngname
+            pngname = path + folder + '/picon_default.png'
+            if fileExists(pngname):
+                return pngname
+        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+        if fileExists(pngname):
+            return pngname
+        else:
+            return resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/picon_default.png')
 
-    def findPicon(self, serviceName):
+    def findPiconServ(self, serviceName):
         try:
             if '::' in serviceName:
                 serviceName = serviceName.split('::')[0] + ':'
@@ -345,36 +361,28 @@ class vZapHistory(Screen, ProtectedScreen):
             pass
         serviceName = serviceName.toString()
         serviceName = '_'.join(serviceName.split(':', 10)[:10])
-        searchPaths = ['/media/hdd/picon/', '/media/usb/picon/', '/usr/share/enigma2/picon/', '/media/sda1/picon/', '/media/sdb1/picon/']
-        for path in searchPaths:
-            pngname = path + serviceName + '.png'
-            if fileExists(pngname):
-                return pngname
-            pngname = path + 'picon_default.png'
-            if fileExists(pngname):
-                return pngname
-        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
-        if fileExists(pngname):
-            return pngname
-        else:
-            return resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
+        return self.findPicon("picon", serviceName)
             
     def findPiconprov(self, service):
-        name = self.getProviderName(service)
-        serviceName = name.upper()
-        searchPaths = ['/media/hdd/piconProv/', '/media/usb/piconProv/', '/usr/share/enigma2/piconProv/', '/media/sda1/piconProv/', '/media/sdb1/piconProv/']
-        for path in searchPaths:
-            pngname = path + serviceName + '.png'
-            if fileExists(pngname):
-                return pngname
-            pngname = path + 'picon_default.png'
-            if fileExists(pngname):
-                return pngname
-        pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
-        if fileExists(pngname):
-            return pngname
+        provName = service.toString()
+        if '%3a//' in provName:
+            name = self.getIPTVProviderName(provName)
         else:
-            return resolveFilename(SCOPE_SKIN_IMAGE, 'skin_default/picon_default.png')
+            name = self.getProviderName(service)
+        provName = name.upper()
+        return self.findPicon("piconProv", provName)
+        
+    def getIPTVProviderName(self, refstr):
+        iptv_prov = '/etc/enigma2/iptvprov.list'
+        nameProv = "StreamTV"
+        if fileExists(iptv_prov):
+            with open(iptv_prov, "r") as f:
+                for d in f.readlines():
+                    if d.split(',')[0] in refstr:
+                        nameProv =  d.split(',')[1].strip()
+#        elif '4097' in refstr or '5001' in refstr or '5002' in refstr:
+#            return "StreamTV"
+        return nameProv
 
     def getProviderName(self, ref):
         if isinstance(ref, eServiceReference):
@@ -408,7 +416,7 @@ class vZapHistory(Screen, ProtectedScreen):
                 ref = x[1]
             else:
                 ref = x[2]
-            png = loadPNG(self.findPicon(ref))
+            png = loadPNG(self.findPiconServ(ref))
             png_prov = loadPNG(self.findPiconprov(ref))
             info = self.serviceHandler.info(ref)
             if info:

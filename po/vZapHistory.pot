@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-17 18:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugin.py:25
+msgid "white"
+msgstr ""
+
+#: plugin.py:26
+msgid "lightgrey"
+msgstr ""
+
+#: plugin.py:27
+msgid "grey"
+msgstr ""
+
+#: plugin.py:28
+msgid "darkgrey"
+msgstr ""
+
+#: plugin.py:29
+msgid "yellow"
+msgstr ""
+
+#: plugin.py:30
+msgid "gold"
+msgstr ""
+
+#: plugin.py:31
+msgid "pink"
+msgstr ""
+
+#: plugin.py:32
+msgid "orange"
+msgstr ""
+
+#: plugin.py:33
+msgid "red"
+msgstr ""
+
+#: plugin.py:34
+msgid "crimson"
+msgstr ""
+
+#: plugin.py:35
+msgid "brown"
+msgstr ""
+
+#: plugin.py:36
+msgid "lime"
+msgstr ""
+
+#: plugin.py:37
+msgid "green"
+msgstr ""
+
+#: plugin.py:38
+msgid "darkgreen"
+msgstr ""
+
+#: plugin.py:39
+msgid "aqua"
+msgstr ""
+
+#: plugin.py:40
+msgid "skyblue"
+msgstr ""
+
+#: plugin.py:41
+msgid "blue"
+msgstr ""
+
+#: plugin.py:42
+msgid "darkblue"
+msgstr ""
+
+#: plugin.py:43
+msgid "lilac"
+msgstr ""
+
+#: plugin.py:44
+msgid "purple"
+msgstr ""
+
+#: plugin.py:47
+msgid "disabled"
+msgstr ""
+
+#: plugin.py:47
+msgid "enabled"
+msgstr ""
+
+#: plugin.py:47
+msgid "disabled at parental lock"
+msgstr ""
+
+#: plugin.py:49
+msgid "only name service"
+msgstr ""
+
+#: plugin.py:49
+msgid "with service picon"
+msgstr ""
+
+#: plugin.py:49
+msgid "with service and provider picons"
+msgstr ""
+
+#: plugin.py:50
+msgid "left"
+msgstr ""
+
+#: plugin.py:50
+msgid "center"
+msgstr ""
+
+#: plugin.py:50
+msgid "right"
+msgstr ""
+
+#: plugin.py:317
+msgid "Zap"
+msgstr ""
+
+#: plugin.py:318
+msgid "Clear"
+msgstr ""
+
+#: plugin.py:319
+msgid "Delete"
+msgstr ""
+
+#: plugin.py:320 plugin.py:583
+msgid "Settings"
+msgstr ""
+
+#: plugin.py:321 plugin.py:615
+msgid "ZapHistory"
+msgstr ""
+
+#: plugin.py:446
+#, python-format
+msgid "%02d.%02d - %02d.%02d (%s%d m)"
+msgstr ""
+
+#: plugin.py:581
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:582
+msgid "Save"
+msgstr ""
+
+#: plugin.py:584
+msgid "Enable zap history:"
+msgstr ""
+
+#: plugin.py:585
+msgid "View mode:"
+msgstr ""
+
+#: plugin.py:586
+msgid "Alignment list:"
+msgstr ""
+
+#: plugin.py:587
+msgid "Maximum zap history entries:"
+msgstr ""
+
+#: plugin.py:588
+msgid "Autozap when move in list:"
+msgstr ""
+
+#: plugin.py:589
+msgid "Service name color:"
+msgstr ""
+
+#: plugin.py:590
+msgid "Event color:"
+msgstr ""
+
+#: plugin.py:591
+msgid "Duration time color:"
+msgstr ""
+
+#: plugin.py:592
+msgid "Progress bar color:"
+msgstr ""
+
+#: plugin.py:593
+msgid "Selected service name color:"
+msgstr ""
+
+#: plugin.py:594
+msgid "Selected event color:"
+msgstr ""
+
+#: plugin.py:595
+msgid "Selected duration time color:"
+msgstr ""
+
+#: plugin.py:596
+msgid "Selected progress bar color:"
+msgstr ""
