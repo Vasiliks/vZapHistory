@@ -363,7 +363,7 @@ class vZapHistory(Screen, ProtectedScreen):
         serviceName = '_'.join(serviceName.split(':', 10)[:10])
         return self.findPicon("picon", serviceName)
             
-    def findPiconprov(self, service):
+    def findPiconProv(self, service):
         provName = service.toString()
         if '%3a//' in provName:
             name = self.getIPTVProviderName(provName)
@@ -415,7 +415,7 @@ class vZapHistory(Screen, ProtectedScreen):
             else:
                 ref = x[2]
             png = loadPNG(self.findPiconServ(ref))
-            png_prov = loadPNG(self.findPiconprov(ref))
+            png_prov = loadPNG(self.findPiconProv(ref))
             info = self.serviceHandler.info(ref)
             if info:
                 name = info.getName(ref).replace('\xc2\x86', '').replace('\xc2\x87', '')
