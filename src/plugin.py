@@ -286,9 +286,9 @@ def vZapHistoryBrowserListEntry(self, serviceName, eventName, durationTime, bar,
         bar_pos=(380, 32)
         bar_size=(140, 8)
 
-    if 'pic_serv' in config.plugins.vZapHistory.viewMode.value:                                                
+    if 'pic_serv' in config.plugins.vZapHistory.viewMode.value:
         res.append(MultiContentEntryPixmapAlphaBlend(pos=png_pos, size=png_size, flags = BT_SCALE, png=png))
-    if 'pic_serv_prov' in config.plugins.vZapHistory.viewMode.value:                                          
+    if 'pic_serv_prov' in config.plugins.vZapHistory.viewMode.value:
         res.append(MultiContentEntryPixmapAlphaBlend(pos=png_prov_pos, size=png_prov_size, flags = BT_SCALE, png=png_prov))
     res.append(MultiContentEntryText(pos=serviceName_pos, size=serviceName_size, font=serviceName_font, flags=lasflags, text=serviceName, color=namecolor, color_sel=namecolor_sel))
     res.append(MultiContentEntryText(pos=eventName_pos, size=eventName_size, font=eventName_font, flags=lasflags | RT_VALIGN_CENTER | RT_WRAP, text=eventName, color=eventcolor, color_sel=eventcolor_sel))
@@ -337,7 +337,7 @@ class vZapHistory(Screen, ProtectedScreen):
     def cancel(self):
         self.timerAutoZap.stop()
         self.close()
-        
+
     def findPicon(self, folder, serviceName):
         searchPaths = ['/media/hdd/', '/media/usb/', '/usr/share/enigma2/', '/media/sda1/', '/media/sdb1/']
         for path in searchPaths:
@@ -362,7 +362,7 @@ class vZapHistory(Screen, ProtectedScreen):
         serviceName = serviceName.toString()
         serviceName = '_'.join(serviceName.split(':', 10)[:10])
         return self.findPicon("picon", serviceName)
-            
+
     def findPiconProv(self, service):
         provName = service.toString()
         if '%3a//' in provName:
@@ -371,7 +371,7 @@ class vZapHistory(Screen, ProtectedScreen):
             name = self.getProviderName(service)
         provName = name.upper()
         return self.findPicon("piconProv", provName)
-        
+
     def getIPTVProviderName(self, refstr):
         iptv_prov = '/etc/enigma2/iptvprov.list'
         nameProv = "StreamTV"
@@ -611,4 +611,3 @@ def main(session, servicelist = None, **kwargs):
 
 def Plugins(**kwargs):
     return PluginDescriptor(name=_('ZapHistory'), where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main)
-
