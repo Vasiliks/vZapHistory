@@ -380,8 +380,6 @@ class vZapHistory(Screen, ProtectedScreen):
                 for d in f.readlines():
                     if d.split(',')[0] in refstr:
                         nameProv =  d.split(',')[1].strip()
-#        elif '4097' in refstr or '5001' in refstr or '5002' in refstr:
-#            return "StreamTV"
         return nameProv
 
     def getProviderName(self, ref):
