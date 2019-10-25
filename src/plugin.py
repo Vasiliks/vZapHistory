@@ -374,13 +374,12 @@ class vZapHistory(Screen, ProtectedScreen):
 
     def getIPTVProviderName(self, refstr):
         iptv_prov = '/etc/enigma2/iptvprov.list'
-        nameProv = "StreamTV"
         if fileExists(iptv_prov):
             with open(iptv_prov, "r") as f:
                 for d in f.readlines():
                     if d.split(',')[0] in refstr:
-                        nameProv =  d.split(',')[1].strip()
-        return nameProv
+                        return d.split(',')[1].strip()
+        return "StreamTV"
 
     def getProviderName(self, ref):
         if isinstance(ref, eServiceReference):
