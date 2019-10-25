@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: vZapHistory\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-17 01:13+0100\n"
+"PO-Revision-Date: 2019-10-26 10:02+0100\n"
+"Last-Translator: Vasiliks <vasiliks@narod.ru>\n"
+"Language-Team: Vasiliks\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Language: de_DE\n"
+"X-Generator: Poedit 2.0.2\n"
+
+msgid "white"
+msgstr "weiß"
+
+msgid "lightgrey"
+msgstr "hellgrau"
+
+msgid "grey"
+msgstr "grau"
+
+msgid "darkgrey"
+msgstr "dunkelgrau"
+
+msgid "yellow"
+msgstr "gelb"
+
+msgid "gold"
+msgstr "gold"
+
+msgid "pink"
+msgstr "pink"
+
+msgid "orange"
+msgstr "orange"
+
+msgid "red"
+msgstr "rot"
+
+msgid "crimson"
+msgstr "purpurrot"
+
+msgid "brown"
+msgstr "braun"
+
+msgid "lime"
+msgstr "lime"
+
+msgid "green"
+msgstr "grün"
+
+msgid "darkgreen"
+msgstr "dunkelgrün"
+
+msgid "aqua"
+msgstr "aqua"
+
+msgid "skyblue"
+msgstr "himmelblau"
+
+msgid "blue"
+msgstr "blau"
+
+msgid "darkblue"
+msgstr "dunkelblau"
+
+msgid "lilac"
+msgstr "lila"
+
+msgid "purple"
+msgstr "violet"
+
+msgid "disabled"
+msgstr "deaktivieren"
+
+msgid "enabled"
+msgstr "aktivieren"
+
+msgid "disabled at parental lock"
+msgstr "Kindersicherung deaktiviert"
+
+msgid "only name service"
+msgstr "nur Name Service"
+
+msgid "with service picon"
+msgstr "mit Service Picon"
+
+msgid "with service and provider picons"
+msgstr "mit Service und Provider Picons"
+
+msgid "left"
+msgstr "links"
+
+msgid "center"
+msgstr "mitte"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "Zap"
+msgstr "Umschalten"
+
+msgid "Clear"
+msgstr "Entleeren"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "ZapHistory"
+msgstr "ZapHistory"
+
+msgid "%02d.%02d - %02d.%02d (%s%d min)"
+msgstr "%02d.%02d - %02d.%02d (%s%d min)"
+
+msgid "Cancel"
+msgstr "Stornieren"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Enable zap history:"
+msgstr "ZapHistory aktivieren:"
+
+msgid "View mode:"
+msgstr "Ansichtsmodus:"
+
+msgid "Alignment list:"
+msgstr "Listenansicht:"
+
+msgid "Maximum zap history entries:"
+msgstr "Maximale ZapHistory eintragen:"
+
+msgid "Autozap when move in list:"
+msgstr "Automatische umschalten beim scrollen:"
+
+msgid "Service name color:"
+msgstr "Sendungsname Farbe (wenn nicht ausgewählt):"
+
+msgid "Event color:"
+msgstr "Ereignis Farbe (wenn nicht ausgewählt):"
+
+msgid "Duration time color:"
+msgstr "Dauer Zeit Farbe (wenn nicht ausgewählt):"
+
+msgid "Progress bar color:"
+msgstr "Progressbar Farbe (wenn nicht ausgewählt):"
+
+msgid "Selected service name color:"
+msgstr "Ausgewählte Sendungsname Farbe (wenn ausgewählt):"
+
+msgid "Selected event color:"
+msgstr "AusgewählteEreignis Farbe (wenn ausgewählt):"
+
+msgid "Selected duration time color:"
+msgstr "Ausgewählte Dauer Zeit Farbe (wenn ausgewählt):"
+
+msgid "Selected progress bar color:"
+msgstr "Ausgewählte Progressbar Farbe (wenn ausgewählt):"
