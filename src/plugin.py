@@ -366,7 +366,7 @@ class vZapHistory(Screen, ProtectedScreen):
     def findPiconProv(self, service):
         provName = service.toString()
         if '%3a//' in provName:
-            name = self.getIPTVProviderName(provName)
+            name = self.getIPTVProviderName(provName).replace('.', '')
         else:
             name = self.getProviderName(service)
         provName = name.upper()
