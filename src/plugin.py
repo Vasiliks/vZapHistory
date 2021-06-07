@@ -339,7 +339,7 @@ class vZapHistory(Screen, ProtectedScreen):
         self.close()
 
     def findPicon(self, folder, serviceName):
-        searchPaths = ['/media/hdd/', '/media/usb/', '/usr/share/enigma2/', '/media/sda1/', '/media/sdb1/']
+        searchPaths = ['/media/hdd/', '/media/usb/', '/media/mmc/', '/usr/share/enigma2/', '/media/sda1/', '/media/sdb1/']
         for path in searchPaths:
             pngname = path + folder + "/" + serviceName + '.png'
             if fileExists(pngname):
