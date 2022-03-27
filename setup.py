@@ -25,6 +25,6 @@ setup(name = 'enigma2-plugin-extensions-vzaphistory',
 		author_email='vasiliks73@gmail.com',
 		package_dir = {PLUGIN_DIR: 'src'},
 		packages=[PLUGIN_DIR],
-		package_data={PLUGIN_DIR: ['buttons/*.png']},
+		package_data={PLUGIN_DIR: ['buttons/*.png', 'locale/*/LC_MESSAGES/*.mo']},
 		description = 'Quick zapping between last viewed channels',
 	)
