@@ -2,7 +2,8 @@
 #created by Vasiliks 11.2015
 #added picon providers 05.01.2018
 #added picon IPTVproviders 10.10.2019
-#r0.1_r7  PLI version
+#change alphatest="blend" to alphatest="on" 04.04.2024
+#r0.1_r9  PLI version
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
@@ -60,11 +61,11 @@ config.plugins.vZapHistory.barcolor_sel = ConfigSelection(default="0xffff55", ch
 
 skin_sd = """
     <screen name="vZapHistory" position="center,center" size="530,400" >
-      <widget name="list" position="0,40" size="530,350" transparent="1"  alphatest="blend"/>
-      <eLabel position="10,28" size="120,3" backgroundColor="#FF0000"/>
-      <eLabel position="140,28" size="120,3" backgroundColor="#00FF00"/>
-      <eLabel position="270,28" size="120,3" backgroundColor="#FFFF00"/>
-      <eLabel position="400,28" size="120,3" backgroundColor="#0000FF"/>
+      <widget name="list" position="0,40" size="530,350" transparent="1" />
+      <eLabel position="10,28" size="120,3" backgroundColor="#FF0000" />
+      <eLabel position="140,28" size="120,3" backgroundColor="#00FF00" />
+      <eLabel position="270,28" size="120,3" backgroundColor="#FFFF00" />
+      <eLabel position="400,28" size="120,3" backgroundColor="#0000FF" />
       <widget name="key_red" position="0,5" zPosition="1" size="120,20" font="Regular; 18" valign="center" halign="center" transparent="1" />
       <widget name="key_green" position="140,5" zPosition="1" size="120,20" font="Regular; 18" valign="center" halign="center" transparent="1" />
       <widget name="key_yellow" position="270,5" zPosition="1" size="120,20" font="Regular; 18" valign="center" halign="center" transparent="1" />
@@ -72,11 +73,11 @@ skin_sd = """
     </screen>"""
 skin_hd = """
     <screen name="vZapHistory" position="center,center" size="680,530" >
-      <widget name="list" position="5,45" size="670,480" transparent="1"  alphatest="blend"/>
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="6,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="172,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="338,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="504,7" size="160,30" transparent="1" alphatest="blend" />
+      <widget name="list" position="5,45" size="670,480" transparent="1" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="6,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="172,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="338,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="504,7" size="160,30" transparent="1" alphatest="on" />
       <widget name="key_red" position="6,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
       <widget name="key_green" position="172,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
       <widget name="key_yellow" position="338,9" zPosition="1" size="160,25" font="Regular; 16" valign="center" halign="center" transparent="1" />
@@ -84,11 +85,11 @@ skin_hd = """
     </screen>"""
 skin_fhd = """
     <screen name="vZapHistory" position="center,center" size="990,680" >
-      <widget name="list" position="5,45" size="980,635" transparent="1" alphatest="blend"/>
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="65,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="295,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="525,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="755,7" size="160,30" transparent="1" alphatest="blend" />
+      <widget name="list" position="5,45" size="980,635" transparent="1" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="65,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="295,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/yellow.png" position="525,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/blue.png" position="755,7" size="160,30" transparent="1" alphatest="on" />
       <widget name="key_red" position="65,9" zPosition="1" size="160,24" font="Regular; 20" valign="center" halign="center" transparent="1" />
       <widget name="key_green" position="295,9" zPosition="1" size="160,24" font="Regular; 20" valign="center" halign="center" transparent="1" />
       <widget name="key_yellow" position="525,9" zPosition="1" size="160,24" font="Regular; 20" valign="center" halign="center" transparent="1" />
@@ -98,24 +99,24 @@ skin_fhd = """
 skinConf_sd = """
     <screen name="vZapHistoryConf" position="center,center" size="530,400" >
       <widget name="config" position="0,50" size="530,350" scrollbarMode="showOnDemand" transparent="1" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="55,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="315,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="55,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="315,7" size="160,30" transparent="1" alphatest="on" />
       <widget name="key_red" position="55,9" zPosition="5" size="160,25" font="Regular;16" valign="center" halign="center" transparent="1" shadowColor="black" />
       <widget name="key_green" position="315,9" zPosition="5" size="160,25" font="Regular;16" valign="center" halign="center" transparent="1" shadowColor="black" />
     </screen>"""
 skinConf_hd = """
     <screen name="vZapHistoryConf" position="center,center" size="660,390" >
       <widget name="config" position="10,50" size="640,340" scrollbarMode="showOnDemand" transparent="1" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="80,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="400,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="80,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="400,7" size="160,30" transparent="1" alphatest="on" />
       <widget name="key_red" position="80,9" zPosition="5" size="160,25" font="Regular;16" valign="center" halign="center" transparent="1" shadowColor="black" />
       <widget name="key_green" position="400,9" zPosition="5" size="160,25" font="Regular;16" valign="center" halign="center" transparent="1" shadowColor="black" />
     </screen>"""
 skinConf_fhd = """
     <screen name="vZapHistoryConf" position="center,center" size="900,520" >
       <widget name="config" position="10,50" size="880,460" itemHeight="35" font="Regular;25" scrollbarMode="showOnDemand" transparent="1" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="130,7" size="160,30" transparent="1" alphatest="blend" />
-      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="590,7" size="160,30" transparent="1" alphatest="blend" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/red.png" position="130,7" size="160,30" transparent="1" alphatest="on" />
+      <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/vZapHistory/buttons/green.png" position="590,7" size="160,30" transparent="1" alphatest="on" />
       <widget name="key_red" position="130,9" zPosition="5" size="160,25" font="Regular;20" valign="center" halign="center" transparent="1" shadowColor="black" />
       <widget name="key_green" position="590,9" zPosition="5" size="160,25" font="Regular;20" valign="center" halign="center" transparent="1" shadowColor="black" />
     </screen>"""
