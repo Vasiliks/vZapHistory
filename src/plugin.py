@@ -3,7 +3,8 @@
 #added picon providers 05.01.2018
 #added picon IPTVproviders 10.10.2019
 #change alphatest="blend" to alphatest="on" 04.04.2024
-#r0.1_r9  PLI version
+#fix python >= 3.10 05.04.2024
+#r0.1_r10  PLI version
 from . import _
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigEnableDisable, ConfigInteger, ConfigSelection, ConfigSubsection, getConfigListEntry
@@ -430,7 +431,7 @@ class vZapHistory(Screen, ProtectedScreen):
                         begin = event.getBeginTime()
                         if begin is not None:
                             end = begin + event.getDuration()
-                            remaining = (end - int(time())) / 60
+                            remaining = (end - int(time())) // 60
                             prefix = ''
                             if remaining > 0:
                                 prefix = "+"
@@ -438,7 +439,7 @@ class vZapHistory(Screen, ProtectedScreen):
                             local_end = localtime(end)
                             bar = 0
                             perc = ''
-                            i = (100 * (int(time()) - begin)) / event.getDuration()
+                            i = (100 * (int(time()) - begin)) // event.getDuration()
                             if i < 101:
                                 bar = i
                             durationTime = _("%02d.%02d - %02d.%02d (%s%d m)") % (local_begin[3],local_begin[4],local_end[3],local_end[4],prefix, remaining)
